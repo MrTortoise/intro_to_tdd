@@ -1,16 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xunit;
+using static System.Int32;
 
 namespace TreeHeightCalculatorSpec
 {
     public class SignalGeneratorWill
     {
-        [Fact]
-        public void ProduceTheRightSetOfData()
+        private List<string> _inputData;
+
+        public SignalGeneratorWill()
         {
-            var expectedresults = new List<string>()
+            _inputData = new List<string>()
             {
                 "1",
                 "2",
@@ -35,9 +37,19 @@ namespace TreeHeightCalculatorSpec
                 "19",
                 "20"
             };
+        }
 
-            Assert.Equal(expectedresults, expectedresults);
-            Assert.Equal(22, expectedresults.Count);
+        [Fact]
+        public void ProduceTheRightSetOfData()
+        {
+            Assert.Equal(_inputData, _inputData);
+            Assert.Equal(22, _inputData.Count);
+        }
+
+        [Fact]
+        public void TestDataContains20Numbers()
+        {
+            Assert.Equal(20, _inputData.Count(n => TryParse(n, out _)));
         }
     }
 }

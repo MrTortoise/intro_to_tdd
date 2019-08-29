@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xunit;
 using static System.Int32;
 
@@ -8,11 +7,12 @@ namespace TreeHeightCalculatorSpec
 {
     public class SignalGeneratorWill
     {
-        private List<string> _inputData;
+        private readonly SignalGenerator _signalGenerator;
+        private readonly List<string> _testData;
 
         public SignalGeneratorWill()
         {
-            _inputData = new List<string>()
+            _testData = new List<string>()
             {
                 "1",
                 "2",
@@ -37,27 +37,26 @@ namespace TreeHeightCalculatorSpec
                 "19",
                 "20"
             };
+
+            _signalGenerator = new SignalGenerator();
         }
 
         [Fact]
         public void ProduceTheRightSetOfData()
         {
-            Assert.Equal(_inputData, GetInput());
-            Assert.Equal(22, _inputData.Count);
+            Assert.Equal(_testData, _signalGenerator.GetInput());
         }
 
-        private IEnumerable<string> GetInput()
+        [Fact]
+        public void Produce22Items()
         {
-            foreach (var val in _inputData)
-            {
-                yield return val;
-            }
+            Assert.Equal(22, _signalGenerator.GetInput().Count());
         }
 
         [Fact]
         public void TestDataContains20Numbers()
         {
-            Assert.Equal(20, GetInput().Count(n => TryParse(n, out _)));
+            Assert.Equal(20, _signalGenerator.GetInput().Count(n => TryParse(n, out _)));
         }
     }
 }

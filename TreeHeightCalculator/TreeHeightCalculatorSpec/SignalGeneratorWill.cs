@@ -42,14 +42,22 @@ namespace TreeHeightCalculatorSpec
         [Fact]
         public void ProduceTheRightSetOfData()
         {
-            Assert.Equal(_inputData, _inputData);
+            Assert.Equal(_inputData, GetInput());
             Assert.Equal(22, _inputData.Count);
+        }
+
+        private IEnumerable<string> GetInput()
+        {
+            foreach (var val in _inputData)
+            {
+                yield return val;
+            }
         }
 
         [Fact]
         public void TestDataContains20Numbers()
         {
-            Assert.Equal(20, _inputData.Count(n => TryParse(n, out _)));
+            Assert.Equal(20, GetInput().Count(n => TryParse(n, out _)));
         }
     }
 }
